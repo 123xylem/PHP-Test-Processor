@@ -1,11 +1,22 @@
 <?php
+require_once '../src/bootstrap.php';
 
-require_once '../src/EventRepository.php';
-
+// require_once '../src/EventRepository.php';
 $repository = new EventRepository();
-$eventId = $_GET['event_id'];
+$eventId = $_GET['event_id'] ?? null;
+
+if (!$eventId) {
+  echo ErrorComponent::render('Event ID Required', 'Please provide an event ID to view the report.');
+  exit;
+}
 
 $report = $repository->getLatestAnalytics($eventId, 'full_report');
+
+if (!$report) {
+  echo ErrorComponent::render('Event ID Not Found', 'Please provide a valid event ID to view the report.');
+  exit;
+}
+
 $report_data = json_decode($report['report_data'], true);
 $event_info = $report_data['event_info'];
 $zone_density = $report_data['zone_density'];

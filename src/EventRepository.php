@@ -1,7 +1,7 @@
 <?php
 // src/EventRepository.php
 
-require_once 'Database.php';
+// require_once 'Database.php';
 
 class EventRepository
 {
@@ -36,7 +36,6 @@ class EventRepository
   public function saveSignals($eventId, $signals)
   {
     $count = 0;
-    var_dump($signals, 'signals');
     foreach ($signals as $signal) {
       $sql = "INSERT INTO signals (id, event_id, timestamp, device_id, signal_strength, zone, x, y) 
                     VALUES (:id, :event_id, :timestamp, :device_id, :signal_strength, :zone, :x, :y)

@@ -1,15 +1,10 @@
 <?php
 // public/api/index.php\
-var_dump($_SERVER['REQUEST_URI']);
-
-require_once '../../src/ApiRouter.php';
-require_once '../../src/EventRepository.php';
-require_once '../../src/AnalyticsProcessor.php';
+require_once __DIR__ . '/../../src/bootstrap.php';
 
 $router = new ApiRouter();
 
-// GET /
-$router->addRoute('GET', '/', function () {
+$router->addRoute('GET', '', function () {
     return [
         'name' => 'Event Analytics API',
         'version' => '1.0.0',
@@ -30,13 +25,13 @@ $router->addRoute('GET', '/events', function () {
 });
 
 // GET /events/{id}
-$router->addRoute('GET', '/events/{id}', function () {
-    if (!isset($_GET['id'])) {
+$router->addRoute('GET', '/events/{id}', function ($params) {
+    if (!isset($params['id'])) {
         header('HTTP/1.1 400 Bad Request');
         return ['error' => 'Event ID is required'];
     }
 
-    $eventId = $_GET['id'];
+    $eventId = $params['id'];
     $repository = new EventRepository();
     $event = $repository->getEvent($eventId);
 
@@ -49,13 +44,13 @@ $router->addRoute('GET', '/events/{id}', function () {
 });
 
 // GET /events/{id}/signals
-$router->addRoute('GET', '/events/{id}/signals', function () {
-    if (!isset($_GET['id'])) {
+$router->addRoute('GET', '/events/{id}/signals', function ($params) {
+    if (!isset($params['id'])) {
         header('HTTP/1.1 400 Bad Request');
         return ['error' => 'Event ID is required'];
     }
 
-    $eventId = $_GET['id'];
+    $eventId = $params['id'];
     $repository = new EventRepository();
     $signals = $repository->getEventSignals($eventId);
 
@@ -67,14 +62,14 @@ $router->addRoute('GET', '/events/{id}/signals', function () {
 });
 
 // GET /events/{id}/analytics
-$router->addRoute('GET', '/events/{id}/analytics', function () {
-    if (!isset($_GET['id'])) {
+$router->addRoute('GET', '/events/{id}/analytics', function ($params) {
+    if (!isset($params['id'])) {
         header('HTTP/1.1 400 Bad Request');
         return ['error' => 'Event ID is required'];
     }
 
-    $eventId = $_GET['id'];
-    $reportType = $_GET['type'] ?? 'full_report';
+    $eventId = $params['id'];
+    $reportType = $params['type'] ?? 'full_report';
 
     $repository = new EventRepository();
     $analytics = $repository->getLatestAnalytics($eventId, $reportType);

@@ -5,7 +5,6 @@ function callApi($endpoint)
 {
   $baseUrl = 'http://localhost/event-analytics/public/api';
   $url = $baseUrl . $endpoint;
-
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $url);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -19,8 +18,8 @@ function callApi($endpoint)
 $eventId = $_GET['event_id'] ?? 'EVT001';
 
 // Get API data
-$eventData = callApi("/events/{$eventId}");
-$analyticsData = callApi("/events/{$eventId}/analytics");
+$eventData = callApi("/event/{$eventId}");
+$analyticsData = callApi("/event/{$eventId}/analytics");
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +67,7 @@ $analyticsData = callApi("/events/{$eventId}/analytics");
         <h2>Error</h2>
         <p><?php echo $eventData['error']; ?></p>
       </div>
-    <?php else: ?>
+    <?php else:  var_dump($eventData); ?>
       <div class="card">
         <h2>Event Information</h2>
         <p><strong>ID:</strong> <?php echo $eventData['event']['id']; ?></p>

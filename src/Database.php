@@ -1,11 +1,11 @@
 <?php
 // src/Database.php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+// require_once __DIR__ . '/../vendor/autoload.php';
 
-// Load environment variables
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
+// // Load environment variables
+// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+// $dotenv->load();
 
 class Database
 {
@@ -51,18 +51,6 @@ class Database
   {
 
     $stmt = $this->pdo->prepare($sql);
-    foreach ($params as $param => $value) {
-      $type = PDO::PARAM_STR;
-      if (is_int($value)) {
-        $type = PDO::PARAM_INT;
-      } elseif (is_bool($value)) {
-        $type = PDO::PARAM_BOOL;
-      } elseif (is_null($value)) {
-        $type = PDO::PARAM_NULL;
-      }
-
-      $stmt->bindValue($param, $value, $type);
-    }
     $stmt->execute($params);
     return $stmt;
   }

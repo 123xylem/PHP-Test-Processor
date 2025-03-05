@@ -1,7 +1,8 @@
 <?php
 // public/test_importer.php
+require_once '../src/bootstrap.php';
 
-require_once '../src/DataImporter.php';
+// require_once '../src/DataImporter.php';
 
 try {
   $importer = new DataImporter('../data/sample_data.json');

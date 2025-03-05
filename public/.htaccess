@@ -2,9 +2,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
-          
-    # Redirect to front controller
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    
+    RewriteCond %{REQUEST_URI} /api/
+    RewriteRule ^ api/index.php [L,QSA]
+            
+    # All other requests
+    RewriteRule .* index.php [L]
 </IfModule>

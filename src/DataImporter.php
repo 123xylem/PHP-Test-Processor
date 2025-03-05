@@ -13,9 +13,9 @@ class DataImporter
 
   public function import()
   {
-    if (!file_exists($this->dataFile)) {
-      throw new Exception("Data file not found: {$this->dataFile}");
-    }
+    // if (!file_exists($this->dataFile)) {
+    //   throw new Exception("Data file not found: {$this->dataFile}");
+    // }
 
     $content = file_get_contents($this->dataFile);
     $data = json_decode($content, true);

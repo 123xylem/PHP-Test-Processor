@@ -1,12 +1,12 @@
 <?php
 // public/test_analytics.php
-
-require_once '../src/DataImporter.php';
-require_once '../src/AnalyticsProcessor.php';
+require_once '../src/bootstrap.php';
+// require_once '../src/DataImporter.php';
+// require_once '../src/AnalyticsProcessor.php';
 
 try {
   // Import data
-  $importer = new DataImporter('../data/sample_event.json');
+  $importer = new DataImporter('../data/sample_data.json');
   $importer->import();
   $eventInfo = $importer->getEventInfo();
   $signals = $importer->getSignalData();

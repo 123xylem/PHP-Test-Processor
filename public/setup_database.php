@@ -1,8 +1,9 @@
 <?php
 // public/setup_database.php
 
+require_once '../src/bootstrap.php';
 
-require_once '../src/Database.php';
+// require_once '../src/Database.php';
 try {
   $db = Database::getInstance();
   $pdo = $db->getPdo();
