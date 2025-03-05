@@ -15,7 +15,6 @@ $signals = $importer->getSignalData();
 // Save to database
 $repository = new EventRepository();
 
-var_dump($eventInfo, 'info');
 // Save event
 $eventId = $repository->saveEvent($eventInfo);
 
