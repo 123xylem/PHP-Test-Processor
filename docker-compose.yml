@@ -1,0 +1,50 @@
+# version: "3"
+
+services:
+  # PHP & Apache service
+  web:
+    image: php:8.1-apache
+    container_name: event-analytics-web
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    depends_on:
+      - db
+    environment:
+      - PHP_MEMORY_LIMIT=256M
+    command: >
+      bash -c "a2enmod rewrite &&
+               docker-php-ext-install pdo pdo_mysql &&
+               apache2-foreground"
+
+  # MySQL service
+  db:
+    image: mysql:8.0
+    container_name: event-analytics-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: event_analytics
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # phpMyAdmin (optional but helpful)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: event-analytics-phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

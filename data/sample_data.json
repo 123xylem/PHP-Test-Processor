@@ -1,0 +1,35 @@
+{
+  "event_id": "EVT001",
+  "name": "Tech Conference 2023",
+  "date": "2023-10-15",
+  "venue": "Convention Center",
+  "signals": [
+    {
+      "id": "SIG001",
+      "timestamp": "2023-10-15 09:15:22",
+      "device_id": "d78a92c1",
+      "signal_strength": 85,
+      "zone": "entrance",
+      "x": 10.5,
+      "y": 5.2
+    },
+    {
+      "id": "SIG002",
+      "timestamp": "2023-10-15 09:16:45",
+      "device_id": "a45b23e8",
+      "signal_strength": 92,
+      "zone": "entrance",
+      "x": 12.1,
+      "y": 6.8
+    },
+    {
+      "id": "SIG003",
+      "timestamp": "2023-10-15 09:45:12",
+      "device_id": "d78a92c1",
+      "signal_strength": 78,
+      "zone": "main_hall",
+      "x": 45.2,
+      "y": 32.7
+    }
+  ]
+}
