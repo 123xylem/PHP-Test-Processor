@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Acme Corporation",
+    "date_added": "2023-10-15",
+    "size": "large",
+    "location": {
+      "street": "123 Main St",
+      "city": "Springfield",
+      "state": "IL",
+      "zip": "62701"
+    }
+  },
+  {
+    "id": 2,
+    "name": "TechStart Inc",
+    "date_added": "2023-10-16",
+    "size": "medium",
+    "location": {
+      "street": "456 Oak Ave",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02108"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Global Services LLC",
+    "date_added": "2023-10-17",
+    "size": "small",
+    "location": {
+      "street": "789 Pine Rd",
+      "city": "Seattle",
+      "state": "WA",
+      "zip": "98101"
+    }
+  }
+]

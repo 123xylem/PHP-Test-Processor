@@ -17,10 +17,13 @@ $router->addRoute('GET', '', function () {
     ];
 });
 
-// GET /events/{id}
 $router->addRoute('GET', '/events', function () {
     $repository = new EventRepository();
     $events = $repository->getAllEvents();
+    ob_start();
+    var_dump($events);
+    $output = ob_get_clean();
+    error_log($output);
     return ['events' => $events];
 });
 
@@ -42,6 +45,29 @@ $router->addRoute('GET', '/events/{id}', function ($params) {
 
     return ['event' => $event];
 });
+
+// POST /events/{id}
+$router->addRoute('POST', '/events', function ($params) {
+    $postdata = file_get_contents("php://input");
+    $request = json_decode($postdata, true);
+    if (!isset($request['event_id'])) {
+        header('HTTP/1.1 400 Bad Request');
+        return ['error' => 'Event ID is required'];
+    }
+
+    $eventId = $request['event_id'];
+    $repository = new EventRepository();
+    $event = $repository->saveEvent($request);
+
+    if (!$event) {
+        header('HTTP/1.1 404 Not Found');
+        return ['error' => 'Event not found'];
+    }
+
+    return ['event' => $event];
+});
+
+
 
 // GET /events/{id}/signals
 $router->addRoute('GET', '/events/{id}/signals', function ($params) {

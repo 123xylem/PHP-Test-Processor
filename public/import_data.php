@@ -1,9 +1,24 @@
 <?php
 // public/import_data.php
 require_once '../src/bootstrap.php';
-// require_once '../src/DataImporter.php';
-// require_once '../src/AnalyticsProcessor.php';
-// require_once '../src/EventRepository.php';
+
+if (isset($_GET['import']) && $_GET['import'] === 'customer') {
+  $importer = new CustomerImporter('../data/customer_data.json');
+  $importer->import();
+  $customerInfo = $importer->getCustomerInfo();
+  foreach ($customerInfo as $customer) {
+    echo "<h1>Customer Imported</h1>";
+
+    echo "<p>Customer ID: {$customer['id']}</p>";
+    echo "<p>Customer Name: {$customer['name']}</p>";
+    echo "<p>Customer Date Added: {$customer['date_added']}</p>";
+    echo "<p>Customer Size: {$customer['size']}</p>";
+    echo "<p>Customer Location: {$customer['location']['street']}, {$customer['location']['city']}, {$customer['location']['state']}, {$customer['location']['zip']}</p>";
+    $repository = new CustomerRepository();
+    $customerId = $repository->saveCustomer($customer);
+  }
+  return;
+}
 
 // Import data
 $importer = new DataImporter('../data/sample_data.json');

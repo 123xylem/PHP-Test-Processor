@@ -48,12 +48,28 @@ try {
         )
     ");
 
+
+  $pdo->exec("
+    CREATE TABLE IF NOT EXISTS customers (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        date DATE NOT NULL,
+        city VARCHAR(255),
+        state VARCHAR(255),
+        zip VARCHAR(255),
+        size VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+");
+
+
   echo "<h1>Database Setup Complete</h1>";
   echo "<p>The following tables were created:</p>";
   echo "<ul>";
   echo "<li>events</li>";
   echo "<li>signals</li>";
   echo "<li>analytics</li>";
+  echo "<li>customers</li>";
   echo "</ul>";
 } catch (Exception $e) {
   echo "<h1>Error</h1>";

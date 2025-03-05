@@ -15,8 +15,8 @@ class DataImporter
   {
 
     $content = file_get_contents($this->dataFile);
-    $data = json_decode($content, true);
 
+    $data = json_decode($content, true);
     $this->eventData = $data;
     return $this->eventData;
   }

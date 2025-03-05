@@ -87,10 +87,26 @@ class EventRepository
     return $this->db->fetch($sql, [':id' => $eventId]);
   }
 
+  public function updateEvent($eventId, $eventData)
+  {
+    var_dump($eventData);
+    $sql = "INSERT INTO events (id, name, date , venue) 
+    ON DUPLICATE KEY UPDATE 
+    name = :update_name, date = :update_date, venue = :update_venue;";
+
+    $params = [
+      ':id' => $eventId,
+      ':name' => $eventData['name'],
+      ':date' => $eventData['date'],
+    ];
+
+    return $this->db->query($sql, $eventData);
+  }
+
   public function getAllEvents()
   {
     $sql = "SELECT * FROM events";
-    return $this->db->fetch($sql);
+    return $this->db->fetchAll($sql);
   }
 
   public function getEventSignals($eventId)

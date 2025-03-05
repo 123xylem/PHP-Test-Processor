@@ -96,7 +96,7 @@ function appExceptionHandler($exception)
   }
 
   // For web requests, show error page
-  include __DIR__ . '/../public/error.html';
+  include __DIR__ . '/../public/error.php';
   exit;
 }
 
