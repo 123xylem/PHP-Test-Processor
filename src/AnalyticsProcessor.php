@@ -92,7 +92,6 @@ class AnalyticsProcessor
 
   public function calculateZoneDensity()
   {
-    // Define zone areas (in square meters) - in a real app, this would come from configuration
     $zoneAreas = [
       'entrance' => 100,
       'main_hall' => 500,

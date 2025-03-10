@@ -4,15 +4,20 @@ require_once __DIR__ . '/../../src/bootstrap.php';
 
 $router = new ApiRouter();
 
-$router->addRoute('GET', '', function () {
+$router->addRoute('GET', '/list', function () {
     return [
         'name' => 'Event Analytics API',
         'version' => '1.0.0',
         'endpoints' => [
-            '/events' => 'Get all events',
-            '/events/{id}' => 'Get event by ID',
-            '/events/{id}/signals' => 'Get signals for an event',
-            '/events/{id}/analytics' => 'Get analytics for an event'
+            'http://localhost/event-analytics/public/api/events' => 'Get all events (GET)',
+            'http://localhost/event-analytics/public/api/events/{id}' => 'Get event by ID (GET, replace {id} with event ID)',
+            'http://localhost/event-analytics/public/api/events/{id}/signals' => 'Get signals for an event (GET, replace {id} with event ID)',
+            'http://localhost/event-analytics/public/api/events/{id}/analytics' => 'Get analytics for an event (GET, replace {id} with event ID)',
+            'http://localhost/import_data.php?file={filename}' => 'Import data from a file (GET, replace {filename} with JSON file path)',
+            'http://localhost/setup_database.php' => 'Setup database (GET)',
+            'http://localhost/test_analytics.php?event_id={id}' => 'Test analytics (GET, replace {id} with event ID)',
+            'http://localhost/test_server.php' => 'Test server status (GET)',
+            'http://localhost/view_report.php?event_id={id}' => 'View report (GET, replace {id} with event ID)',
         ]
     ];
 });
